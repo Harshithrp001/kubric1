@@ -4,7 +4,7 @@ import scipy
 import numpy
 import sys
 import io
-from sklearn.linear_model import LinearRegression 
+from sklearn.linear_model import LinearRegression, BayesianRidge
 TRAIN_DATA_URL = "https://storage.googleapis.com/kubric-hiring/linreg_train.csv"
 TEST_DATA_URL = "https://storage.googleapis.com/kubric-hiring/linreg_test.csv"
 
@@ -22,7 +22,7 @@ def predict_price(area) -> float:
     d.reset_index(level=0,inplace=True)
     d=d[1:]
     d.columns=['area','price']
-    model=LinearRegression()
+    model=BayesianRidge()
     model.fit(numpy.reshape(numpy.array(d['area']),(-1,1)),numpy.reshape(numpy.array(d['price']),(-1,1)))
     area=area.reshape(-1,1)
     print(model.coef_)
