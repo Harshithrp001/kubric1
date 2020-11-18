@@ -23,14 +23,13 @@ def predict_price(area) -> float:
     d=d[1:]
     d.columns=['area','price']
     model=LinearRegression()
-    model.fit(d['area'],d['price'])
+    model.fit(numpy.reshape(numpy.array(d['area']),(-1,1)),numpy.reshape(numpy.array(d['price']),(-1,1)))
     area=area.reshape(-1,1)
     print(model.coef_)
     print(model.intercept_)
     return model.predict(area)
 
     # YOUR IMPLEMENTATION HERE
-    ...
 
 
 if __name__ == "__main__":
